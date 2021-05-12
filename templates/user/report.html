@@ -1,0 +1,47 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block report %}
+    <div class="col-lg-10 mt-4">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="card">
+                    <div class="card-header">Report Your Posts..</div>
+                    <div class="card-body">
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <label for="">From This Date</label>
+                                <input type="datetime-local" class="form-control" name="q1">
+                            </div>
+                            <div class="form-group">
+                                <label for="">To This Date</label>
+                                <input type="datetime-local" class="form-control" name="q2">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-info btn-block">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-hover table-stripped mt-4">
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Topic</th>
+                <th>Date & Time </th>
+            </tr>
+            {% for foo in se %}
+                <tr>
+                    <td>{{ foo.post_name }}</td>
+                    <td>{{ foo.post_category }}</td>
+                    <td>{{ foo.post_topic }}</td>
+                    <td>{{ foo.post_doc }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

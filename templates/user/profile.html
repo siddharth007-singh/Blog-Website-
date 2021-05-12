@@ -1,0 +1,78 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block profile %}
+    <div class="col-lg-5">
+        <div class="card shadow-lg" style="border: none">
+            <img src="{{ user.nu_image.url }}" alt="" class="card-img-top mt-3">
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <a href="{% url 'user_edit_image' user.nu_id %}" class="btn btn-sm btn-info mt-2">Change Image</a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <a href="#change_password" data-toggle="modal" class="btn btn-sm btn-info mt-2">Change Password</a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <a href="{% url 'user_edit_info' user.nu_id %}" class="btn btn-sm btn-info mt-2 px-4">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card shadow-lg mt-3">
+            <div class="card-header"><h7 style="font-weight: 500!important;">Information</h7></div>
+            <div class="card-body">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ user.nu_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.nu_email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date of Birth</th>
+                        <td>{{ user.nu_doc }}</td>
+                    </tr>
+                    <tr>
+                        <th>Contact Number</th>
+                        <td>{{ user.nu_phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Myself</th>
+                        <td>{{ user.nu_myself|safe }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block password_change %}
+    <div class="modal fade" id="change_password" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                      <div class="modal-body">
+                          {% load crispy_forms_tags %}
+                          <form action="" method="post" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              {{ user_update|crispy }}
+                              <div class="form-group">
+                                  <input type="submit" class="btn btn-info btn-block" value="Change Password">
+                              </div>
+                          </form>
+                      </div>
+                </div>
+          </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'ckeditor_4.14.1_standard/ckeditor/ckeditor.js' %}"></script>
+    <script>
+        CKEDITOR.replace('nu_myself');
+    </script>
+{% endblock %}

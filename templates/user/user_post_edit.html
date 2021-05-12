@@ -1,0 +1,21 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block user_post_edit %}
+    <div class="col-lg-9">
+        <div class="card">
+        <div class="card-body">
+            {% load crispy_forms_tags %}
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ edit.media }}
+                {{ edit|crispy }}
+                <div class="form-group">
+                    <input type="submit" class="btn btn-block btn-info">
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}

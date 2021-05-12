@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eduBlog</title>
+    <script src="https://kit.fontawesome.com/91d402bf5f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    {% load static %}
+
+</head>
+<body>
+    {% block style %}
+        <style>
+            #footer-global {
+                background: #504e4b;
+                height: auto;
+                position: relative;
+                bottom: auto;
+                left: auto;
+                right: auto;
+                z-index: 1;
+                color: #c7c6c5;
+                font-size: 14px;
+                line-height: 23px;
+                text-align: center;
+                padding: 45px 0;
+            }
+            .back{
+                border: 1px solid #a4b97a ;
+            }
+        </style>
+    {% endblock %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg py-4">
+        <a href="{% url 'homepage' %}" class="navbar-brand ml-5"><h2>eduBlog</h2></a>
+            <ul class="navbar-nav ml-auto">
+                {% if 'logins' not in request.session %}
+                    <li class="nav-item">
+                        <a href="{% url 'signin' %}">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-bounding-box" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="font-size: 20px; color: #9fb671">
+                              <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                              <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                        </a>
+                     </li>
+                {% else %}
+                    <li class="nav-item ml-4">
+                        <a href="{% url 'user_dashboard' %}">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-laptop" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="font-size: 20px; color: #9fb671">
+                              <path fill-rule="evenodd" d="M13.5 3h-11a.5.5 0 0 0-.5.5V11h12V3.5a.5.5 0 0 0-.5-.5zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2h-11z"/>
+                              <path d="M0 12h16v.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5V12z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="nav-item ml-4">
+                        <a href="{% url 'logout' %}">
+                            <span>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="font-size: 20px; color: red;"><path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/><path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/></svg>
+                            </span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+    </nav>
+    {% block top %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-4 mt-3">
+                                <p class="text-muted">Showing 1 to 12 of 2478 posts</p>
+                            </div>
+                            <div class="col-lg-4 ml-auto mt-3">
+                                <form action="{% url 'searchbar' %}" method="get">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="eg: Serach your blog by Category" name="search">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endblock %}
+
+    {% block cards %}
+    {% endblock %}
+
+    {% block author %}
+    {% endblock %}
+
+    {% block catshow %}
+        <div class="container mt-3">
+            <div class="row">
+               <div class="heading text-center mt-3">
+                    <h5>BLOG CATEGORIES</h5>
+                    <h2 class="text-muted">Explore articles organized by <br>Category and Popular tags.</h2>
+               </div>
+                <div class="col-lg-3 mt-3">
+                    <div class="card">
+                        <div class="card-body" style="background-color:#fed187">
+                            <div class="icon text-center">
+                                <i class="far fa-lightbulb" style="color: white; font-size: 80px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-center mt-2">Inspiration</h5>
+                </div>
+                <div class="col-lg-3 mt-3">
+                    <div class="card">
+                        <div class="card-body" style="background-color:#ffbf97">
+                            <div class="icon text-center">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-map" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: white; font-size: 80px">
+                                <path fill-rule="evenodd" d="M15.817.613A.5.5 0 0 1 16 1v13a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 14.51l-4.902.98A.5.5 0 0 1 0 15V2a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0l4.902.98 4.902-.98a.5.5 0 0 1 .415.103zM10 2.41l-4-.8v11.98l4 .8V2.41zm1 11.98l4-.8V1.61l-4 .8v11.98zm-6-.8V1.61l-4 .8v11.98l4-.8z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-center mt-2">Tutorials</h5>
+                </div>
+                <div class="col-lg-3 mt-3">
+                    <div class="card">
+                        <div class="card-body" style="background-color:#ffa995">
+                            <div class="icon text-center">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-reception-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: white; font-size: 80px">
+                                <path d="M0 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-8zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-11z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-center mt-2">Trendigs</h5>
+                </div>
+                <div class="col-lg-3 mt-3">
+                    <div class="card">
+                        <div class="card-body" style="background-color:#bb97d1;">
+                            <div class="icon text-center">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-briefcase" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: white; font-size: 80px">
+                                  <path fill-rule="evenodd" d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6h-1v6a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-6H0v6z"/>
+                                  <path fill-rule="evenodd" d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5v2.384l-7.614 2.03a1.5 1.5 0 0 1-.772 0L0 6.884V4.5zM1.5 4a.5.5 0 0 0-.5.5v1.616l6.871 1.832a.5.5 0 0 0 .258 0L15 6.116V4.5a.5.5 0 0 0-.5-.5h-13zM5 2.5A1.5 1.5 0 0 1 6.5 1h3A1.5 1.5 0 0 1 11 2.5V3h-1v-.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5V3H5v-.5z"/>
+                                    </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-center mt-2">Businnes</h5>
+                </div>
+                <div class="col-lg-3 mt-3">
+                    <div class="card">
+                        <div class="card-body" style="background-color:#aeb0ed;">
+                            <div class="icon text-center">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: white; font-size: 80px">
+                                  <path fill-rule="evenodd" d="M11.314 1.036a.5.5 0 0 1 .65.278l2 5a.5.5 0 1 1-.928.372l-2-5a.5.5 0 0 1 .278-.65zm-6.628 0a.5.5 0 0 0-.65.278l-2 5a.5.5 0 1 0 .928.372l2-5a.5.5 0 0 0-.278-.65z"/>
+                                  <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 0-.489.605l1.5 7A.5.5 0 0 0 3 15h10a.5.5 0 0 0 .489-.395l1.5-7A.5.5 0 0 0 14.5 7h-13zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z"/>
+                                  <path d="M0 6.5A.5.5 0 0 1 .5 6h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-center mt-2">Shop Center</h5>
+                </div>
+                <div class="col-lg-3 mt-3">
+                    <div class="card">
+                        <div class="card-body" style="background-color:#abdbed;">
+                            <div class="icon text-center">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-newspaper" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: white; font-size: 80px">
+                                  <path fill-rule="evenodd" d="M0 2A1.5 1.5 0 0 1 1.5.5h11A1.5 1.5 0 0 1 14 2v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14V2zm1.5-.5A.5.5 0 0 0 1 2v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-.5-.5h-11z"/>
+                                  <path fill-rule="evenodd" d="M15.5 3a.5.5 0 0 1 .5.5V14a1.5 1.5 0 0 1-1.5 1.5h-3v-1h3a.5.5 0 0 0 .5-.5V3.5a.5.5 0 0 1 .5-.5z"/>
+                                  <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-center mt-2">Humor</h5>
+                </div>
+                <div class="col-lg-3 mt-3">
+                    <div class="card">
+                        <div class="card-body" style="background-color:#9fdac5;">
+                            <div class="icon text-center">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-right-quote" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: white; font-size: 80px">
+                                    <path fill-rule="evenodd" d="M2 1h12a1 1 0 0 1 1 1v11.586l-2-2A2 2 0 0 0 11.586 11H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+                                    <path fill-rule="evenodd" d="M7.066 4.76A1.665 1.665 0 0 0 4 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112zm4 0A1.665 1.665 0 0 0 8 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112z"/>
+                                    </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-center mt-2">Community</h5>
+                </div>
+                <div class="col-lg-3 mt-3">
+                    <div class="card">
+                        <div class="card-body" style="background-color:#eca6d0;">
+                            <div class="icon text-center">
+                                <i class="fas fa-bullhorn" style="color: white; font-size: 80px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-center mt-2">Announcements</h5>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block detail %}
+    {% endblock %}
+
+    {% block tags %}
+            <div class="container">
+                <div class="row">
+                    <h5 class="text-center mt-5">POPULAR TAGS</h5>
+                    <div class="col-lg-8 mx-auto mt-3">
+                        {% for foo in cat %}
+                            <a href="{% url 'category_filter' foo.cat_id %}" class="btn btn-light text-muted ml-2 mt-2">{{ foo.cat_title }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+    {% endblock %}
+
+    {% block jumbotron %}
+         <div class="jumbotron mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="box text-center">
+                        <div class="icon">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-newspaper" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: #9fb671; font-size: 80px">
+                                  <path fill-rule="evenodd" d="M0 2A1.5 1.5 0 0 1 1.5.5h11A1.5 1.5 0 0 1 14 2v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14V2zm1.5-.5A.5.5 0 0 0 1 2v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-.5-.5h-11z"/>
+                                  <path fill-rule="evenodd" d="M15.5 3a.5.5 0 0 1 .5.5V14a1.5 1.5 0 0 1-1.5 1.5h-3v-1h3a.5.5 0 0 0 .5-.5V3.5a.5.5 0 0 1 .5-.5z"/>
+                                  <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+                                </svg>
+                        </div>
+                        <h4 class="mt-2">Made with <br> Creative Market</h4>
+                        <p class="mt-2 text-muted">Browse a gallery of inspiration made with design assets from Creative Market.</p>
+                        <div class="btn text-white" style="background-color:#9fb671 ">Explore The Gallery
+                            <span>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 8l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
+                                <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5H13a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 8z"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-lg-4">
+                    <div class="box2 text-center">
+                        <div class="icon">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-badge" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: #9fb671; font-size: 80px">
+                              <path fill-rule="evenodd" d="M12 1H4a1 1 0 0 0-1 1v11.755S4 12 8 12s5 1.755 5 1.755V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                              <path fill-rule="evenodd" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                        </div>
+                        <h4 class="mt-2">Meet the Creative <br> Market Authors</h4>
+                        <p class="mt-2 text-muted">Learn more about the talented writers behind the articles..</p>
+                        <a href="{% url 'meet_author' %}" class="btn text-white" style="background-color:#9fb671 ">Meet The Author
+                            <span>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 8l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
+                                <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5H13a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 8z"/>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-lg-4">
+                    <div class="box3 text-center">
+                        <div class="icon">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-newspaper" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: #9fb671; font-size: 80px">
+                                  <path fill-rule="evenodd" d="M0 2A1.5 1.5 0 0 1 1.5.5h11A1.5 1.5 0 0 1 14 2v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14V2zm1.5-.5A.5.5 0 0 0 1 2v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-.5-.5h-11z"/>
+                                  <path fill-rule="evenodd" d="M15.5 3a.5.5 0 0 1 .5.5V14a1.5 1.5 0 0 1-1.5 1.5h-3v-1h3a.5.5 0 0 0 .5-.5V3.5a.5.5 0 0 1 .5-.5z"/>
+                                  <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+                                </svg>
+                        </div>
+                        <h4 class="mt-2">Get Our FREE <br> Branding eBook</h4>
+                        <p class="mt-2 text-muted">Get a FREE, fun, and friendly guide to design your own brand.</p>
+                        <a href="" class="btn text-white" style="background-color:#9fb671 ">Get Your eBook
+                            <span>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 8l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
+                                <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5H13a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 8z"/>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block footer %}
+        <footer id="footer-global" data-module="Footer">
+            <div class="head">
+                <h3>Bloogify</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci consequatur <br>consequuntur deserunt dolorem earum,</p>
+            </div>
+            <hr style="margin-left: 120px; margin-right: 120px">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-lg-4 mt-2" style="text-decoration: none;  ">Made by Siddharth with ❤</div>
+                    <div class="col-lg-4 mt-2"><span style="color:#bb97d1">{{ postcount }}</span> Posts <span style="color:#bb97d1">{{ usercount }}</span> Members <span style="color:#bb97d1"> {{ topiccount }}</span> Topic</div>
+                    <div class="col-lg-4 mt-2">© 2020 Creative Market. All rights reserved.</div>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
+
+    {% block javascript %}{% endblock %}
+</body>
+</html>

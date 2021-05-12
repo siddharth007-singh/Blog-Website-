@@ -1,0 +1,65 @@
+{% extends 'public/base.html' %}
+
+{% load static %}
+
+{% block top %}
+{% endblock %}
+
+{% block detail %}
+    <div class="container">
+        <div class="row">
+            {% for p in posts %}
+                <div class="col-lg-8 mt-3">
+                    <h1>{{ p.post_name }}</h1>
+                    <h7 class="card-text" style="font-size: 12px">By <span style="color: #9fb671">{{ p.post_user }}</span> • {{ p.post_doc }} in <span style="color: #9fb671">{{ p.post_category }}</span></h7>
+                    <br>
+                    <button class="btn btn-info mt-2 px-4"><span><i class="fab fa-twitter"></i></span> Tweet it</button>
+                    <button class="btn btn-primary mt-2 px-4"><span><i class="fab fa-facebook-f"></i></span>  Share it</button>
+                    <img src="{{ p.post_image.url }}" alt="" class="mt-3 card-img-top">
+                    <p class="card-text mt-2">
+                        {{ p.post_description|safe}}
+                        <p class="text-small text-center">!!! Here are some tips to get you started. !!!</p>
+                    <hr>
+                        <div class="share  text-center">
+                            <h4>Share it</h4>
+                            <a href="" class="btn px-4" style="background-color: #55acee; color: white"><span><i class="fab fa-twitter"></i></span> Tweet it</a>
+                            <a href="" class="btn btn-primary px-4"><span><i class="fab fa-facebook-f"></i></span>  Share it</a>
+                            <a href="" class="btn  px-4" style="background-color: #3b5998; color: white">Share it</a>
+                        </div>
+                    <hr>
+                    <div class="backtotop text-center">
+                        <a href="" class="btn back px-4" style="color:#a4b97a">Back To Top</a>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="col-lg-4 mt-3">
+                <h4 class="text-center">Popular Tags</h4>
+                <hr>
+                {% for c in cat %}
+                    <a href="{% url 'category_filter' c.cat_id %}" class="btn btn-light text-muted ml-2 mt-2">{{ c.cat_title }}</a>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block cards %}
+{% endblock %}
+
+{% block catshow %}
+{% endblock %}
+
+{% block tags %}
+{% endblock %}
+
+
+{% block jumbotron %}
+    {{ block.super }}
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
+

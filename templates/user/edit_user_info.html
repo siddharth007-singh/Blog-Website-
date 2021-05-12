@@ -1,0 +1,22 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block detailmodal %}
+    <div class="col-lg-8 mx-auto mt-3">
+        <div class="card">
+            <div class="card-header text-center">Check Your Information OR need to Upadate</div>
+            <div class="card-body">
+                {% load crispy_forms_tags %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ edit.media }}
+                    {{ edit|crispy }}
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-info btn-block">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

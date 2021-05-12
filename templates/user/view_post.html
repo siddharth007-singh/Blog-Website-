@@ -1,0 +1,55 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block view_post %}
+    <div class="col-lg-4">
+        <div class="card mt-3 shadow-lg">
+            {% for v in view %}
+                <img src="{{ v.post_image.url }}" alt="" class="card-img-top">
+            {% endfor %}
+
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="col-lg-6">
+            <div class="card mt-2 shadow-lg">
+                <div class="card-body">
+                    {% for v in view %}
+                        <table class="table">
+                            <tr>
+                                <th>Category</th>
+                                <td>{{ v.post_category }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Topic</th>
+                                <td>{{ v.post_topic }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Author</th>
+                                <td>{{ v.post_user }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Doc </th>
+                                <td>{{ v.post_doc }}</td>
+                            </tr>
+                        </table>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 mt-3">
+            <div class="card shadow-lg">
+                {% for v in view %}
+                    <div class="card-body">
+                        <p class="card-text">{{ v.post_description|safe }}</p>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

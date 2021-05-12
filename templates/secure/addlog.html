@@ -1,0 +1,85 @@
+{# @import url('https://fonts.googleapis.com/css2?family=Varta:wght@300&display=swap');#}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>edublog</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Varta:wght@300&display=swap');
+        body{
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            background: #e9eaea;
+            font-family: 'Roboto', sans-serif;
+
+        }
+        .container{
+            width: 450px;
+            margin: 70px auto;
+        }
+        .container>h2{
+            font-family: 'Roboto',  serif;
+        }
+        .log {
+            width: 100%;
+            background: #fff;
+            height: 60px;
+            float: left;
+            text-align: center;
+            line-height: 80px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .loginform{
+            background: #fff;
+            box-sizing: border-box;
+            padding: 40px;
+            clear: both;
+            width: 100%;
+            height: 350px;
+        }
+        .input{
+            width: 100%;
+            box-sizing: border-box;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 2px solid #e9eaea;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.5s ease;
+            color: #3e3e40;
+        }
+        .input:focus{
+            border: 2px solid #9fb671;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="log mt-3" style='color: #9fb671; font-size: 25px'>Admin Login</div>
+        <div class="loginform">
+            <form action="{% url 'admin_login' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control input" placeholder="Name" name="name">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control input" placeholder="Password" name="password">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-block" style="background-color: #9fb671; color: #ffffff;" style="padding: 10px 50px;">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

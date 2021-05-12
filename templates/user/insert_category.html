@@ -1,0 +1,54 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block insert_category %}
+    <div class="col-lg-10 mt-5">
+        <h2>Insert Category..</h2>
+        <p class="lead">20 topics are already been posted</p>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header text-center">Insert Category Here..</div>
+                        <div class="card-body">
+                            {% load crispy_forms_tags %}
+                            <form action="{% url 'insert_category' %}" method="post">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-info btn-block">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body shadow-sm">
+                            <table class="table table-hover table-stripped">
+                                <tr>
+                                    <th>Category Title</th>
+                                    <th>Category Date</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for foo in cat %}
+                                    <tr>
+                                        <td>{{ foo.cat_title }}</td>
+                                        <td>{{ foo.cat_doc }}</td>
+                                        <td>
+                                            <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                            <a href="" class="btn btn-sm btn-info">Edit</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>edublog</title>
+    {% load static %}
+    <script src="https://kit.fontawesome.com/91d402bf5f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            background: #e9eaea;
+            font-family: 'Roboto', sans-serif;
+
+        }
+        .container{
+            width: 550px;
+            margin: 70px auto;
+        }
+        .container>h2{
+            font-family: 'Roboto',  serif;
+        }
+        .sign{
+            width: 100%;
+            background: #fff;
+            height: 60px;
+            float: left;
+            text-align: center;
+            line-height: 80px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .signform{
+            background: #fff;
+            box-sizing: border-box;
+            padding: 40px;
+            clear: both;
+            width: 100%;
+            height: 800px;
+        }
+        .input{
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px solid #e9eaea;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.5s ease;
+            color: #3e3e40;
+        }
+        .input:focus{
+            border: 2px solid #9fb671;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sign mt-3" style='color: #9fb671; font-size: 25px'>Signin</div>
+        <div class="signform">
+            <form action="{% url 'login' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control input" placeholder="Your Name" name="nu_name">
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control input" placeholder="Your City" name="nu_city">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control input" placeholder="Your State" name="nu_state">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <input type="file" name="nu_image">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <input type="date" class="form-control input" name="nu_doc">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea name="nu_address" id="" rows="5" class="form-control input" placeholder="Write Your Address"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control input" placeholder="Enter Your Phone Number" name="nu_phone">
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <input type="email" class="form-control input" placeholder="Enter Your email" name="nu_email">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <input type="password" class="form-control input" placeholder="Your Password" name="nu_password">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea name="nu_myself" id="" rows="5" class="form-control input" placeholder="Write About Yourself"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-block" value="Create Account" style="background-color: #9fb671; color: white">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

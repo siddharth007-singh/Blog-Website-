@@ -1,0 +1,32 @@
+{% extends 'secure/base.html' %}
+
+{% load static %}
+
+{% block secure_manage_posts %}
+    <table class="table table-stripped table-hover mt-5 table-sm">
+        <tr>
+            <th>Status.</th>
+            <th>Post</th>
+            <th>User Name</th>
+            <th>Action</th>
+        </tr>
+        {% for foo in sec_post %}
+            <tr>
+                {% if foo.post_status == "1" %}
+                    <td><div class=" py-1 px-2" style="border: 1px solid rgba(0, 0, 0, .2); background-color: red; text-align: center; color: white">Pending</div></td>
+                {% else %}
+                    <td><div class="py-1 px-2" style="border: 1px solid rgba(1, 0, 0, .4); background-color: green; text-align: center; color: white">Apporeved</div></td>
+                {% endif %}
+                <td>{{ foo.post_name }}</td>
+                <td>{{ foo.post_user.nu_name}}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="{% url 'delete_post' foo.post_id %}" class="btn btn-sm btn-danger">delete</a>
+                        <a href="{% url 'secure_viewpost' foo.post_id %}" class="btn btn-sm btn-warning">view</a>
+                        <a href="{% url 'secure_edit' foo.post_id %}" class="btn btn-sm btn-info">edit</a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
